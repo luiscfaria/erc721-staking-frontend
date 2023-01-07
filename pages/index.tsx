@@ -1,14 +1,15 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import React from "react";
+import UserTokens from "../components/UserTokens";
+import NFTs from "../components/NFts";
 
 export default function Home() {
   return (
     <>
-      <h1>hello</h1>
+      <div className="main">
+        <h1>Stake your NFTs and claim rewards!</h1>
+        <UserTokens/>
+        <NFTs />
+      </div>
     </>
-  )
+  );
 }

@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { Body } from '../components/Body';
 import '../styles/custom.css';
 import '../styles/globals.css';
+import '../styles/styles.css';
 import React from 'react';
 
 export default function MyApp(props: AppProps): JSX.Element {
