@@ -1,8 +1,31 @@
 import * as React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
-
 import { useRouter } from "next/router";
+
+import "@rainbow-me/rainbowkit/styles.css";
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { configureChains, createClient, goerli, WagmiConfig } from "wagmi";
+import { mainnet, polygon, optimism, arbitrum } from "wagmi/chains";
+
+import { alchemyProvider } from "wagmi/providers/alchemy";
+import { publicProvider } from "wagmi/providers/public";
+import settings from "../config/settings";
+
+const { chains, provider } = configureChains(
+  [mainnet, goerli, polygon, optimism, arbitrum],
+  [alchemyProvider({ apiKey: settings.alchemy.id }), publicProvider()]
+);
+const { connectors } = getDefaultWallets({
+  appName: "NFT Staking",
+  chains,
+});
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+});
 
 const colors = {
   brand: {
@@ -58,9 +81,13 @@ function MultipleProviderComponent(props: any) {
 
   return (
     <div>
-        <ChakraProvider theme={theme}>
-          <Component {...props} />
-        </ChakraProvider>
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider chains={chains}>
+          <ChakraProvider theme={theme}>
+            <Component {...props} />
+          </ChakraProvider>
+        </RainbowKitProvider>
+      </WagmiConfig>
     </div>
   );
 }
