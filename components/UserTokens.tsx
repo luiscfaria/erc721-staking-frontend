@@ -12,11 +12,11 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 
 function UserTokens() {
   return (
-    <TableContainer width={800}>
+    <TableContainer width={800} marginTop="1rem">
       <Table variant="simple">
         <TableCaption color="white">User Tokens</TableCaption>
         <Thead>
@@ -31,7 +31,7 @@ function UserTokens() {
             <Td>Claimable Rewards</Td>
             <Td>0000000000000000</Td>
             <Td>
-              <Button className="claim-button" size="xs" variant='outline'>
+              <Button className="claim-button" size="xs" variant="outline">
                 CLAIM
               </Button>
             </Td>
