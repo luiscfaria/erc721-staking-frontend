@@ -14,7 +14,10 @@ import {
 
 import { Button } from "@chakra-ui/react";
 
+import useMoralis from "../hooks/useMoralis";
+
 function NFTs() {
+  const { getUserNfts } = useMoralis();
   return (
     <TableContainer width={800} marginTop="1rem">
       <Table variant="simple">
