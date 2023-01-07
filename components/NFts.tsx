@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Table,
@@ -18,32 +18,38 @@ import useMoralis from "../hooks/useMoralis";
 
 function NFTs() {
   const { getUserNfts } = useMoralis();
+  const [userNtfs, setUserNtfs] = useState<object[] | undefined>();
+
+  useEffect(() => {
+    const initNtfs = async () => {
+      const nfts = await getUserNfts();
+      setUserNtfs(nfts);
+    };
+    initNtfs();
+  }, []);
   return (
     <TableContainer width={800} marginTop="1rem">
       <Table variant="simple">
         <TableCaption color="white">User NFTs</TableCaption>
         <Thead>
           <Tr color="#A9149C">
-            <Th color="#A9149C">NFT</Th>
-            <Th color="#A9149C"> </Th>
+            <Th color="#A9149C">Name</Th>
+            <Th color="#A9149C">Token ID</Th>
             <Th color="#A9149C">Action</Th>
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td>Claimable Rewards</Td>
-            <Td> </Td>
-            <Td>
-              <Button className="claim-button" size="xs" variant="outline">
-                STAKE
-              </Button>
-            </Td>
-          </Tr>
-          <Tr>
-            <Td>Current Balance</Td>
-            <Td> </Td>
-            <Td> </Td>
-          </Tr>
+          {userNtfs?.map((nft, index) => (
+            <Tr key={index}>
+              <Td>{nft.name}</Td>
+              <Td>{nft.token_id}</Td>
+              <Td>
+                <Button className="claim-button" size="xs" variant="outline">
+                  STAKE
+                </Button>
+              </Td>
+            </Tr>
+          ))}
         </Tbody>
       </Table>
     </TableContainer>
