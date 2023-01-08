@@ -25,6 +25,7 @@ import {
   useWaitForTransaction,
   useContractRead,
 } from "wagmi";
+
 import settings from "../config/settings";
 import abi from "../data/abi";
 
@@ -72,18 +73,6 @@ function NFTs() {
 
   const { write: setApprove, data: approveTxData } = useContractWrite(ApproveConfig);
 
-  // const { data: approveWaitData, error: approveWaitError } = useWaitForTransaction({
-  //   hash: approveTxData?.hash,
-  //   onSuccess(data) {
-  //     console.log("Use Wait on success", { data });
-  //     if (data.status === 0) {
-  //       handleTransactionResult(false);
-  //     } else {
-  //       handleTransactionResult(true);
-  //     }
-  //   },
-  // });
-
   // ========================================================================
 
   const { config: stakeConfig, error } = usePrepareContractWrite({
@@ -97,7 +86,7 @@ function NFTs() {
 
   const handleTransactionResult = (result: boolean) => {
     toast({
-      title: result ? "Minted!" : "Something went wrong :(",
+      title: result ? "Success!" : "Something went wrong :(",
       status: result ? "success" : "error",
       isClosable: true,
     });
@@ -124,6 +113,8 @@ function NFTs() {
   };
 
   // ===============================================================================
+
+  
 
   return (
     <>

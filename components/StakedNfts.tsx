@@ -96,7 +96,7 @@ function StakedNfts() {
         </div>
       ) : (
         <>
-          {!userNtfs ? (
+          {userNtfs && userNtfs.length > 0 ? (
             <TableContainer width={800} marginTop="1rem">
               <Table variant="simple">
                 <TableCaption color="white">User NFTs</TableCaption>
@@ -110,7 +110,7 @@ function StakedNfts() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {userNtfs?.map((nft, index) => (
+                  {userNtfs?.map((nft, index: number) => (
                     <Tr key={index}>
                       <Td>{nft.name}</Td>
                       <Td>{nft.token_id}</Td>
@@ -130,7 +130,9 @@ function StakedNfts() {
               </Table>
             </TableContainer>
           ) : (
-            <h2>You dont have any staked NFTs</h2>
+            <>
+              <h2>You dont have any staked NFTs</h2>
+            </>
           )}
         </>
       )}
