@@ -31,10 +31,16 @@ import abi from "../data/abi";
 
 import { useUserContext } from "../context/UserInfoContext";
 
+
+export interface INft {
+  name: string;
+  token_id: string;
+}
+
 function NFTs() {
   const { userValues, updateContext } = useUserContext();
   const { getUserNfts } = useMoralis();
-  const [userNtfs, setUserNtfs] = useState<object[] | undefined>();
+  const [userNtfs, setUserNtfs] = useState<INft[] | undefined>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [selectedTokenId, setSelectedTokenId] = useState<string>("0");
 
@@ -44,7 +50,7 @@ function NFTs() {
     const initNtfs = async () => {
       setIsLoading(true);
       const nfts = await getUserNfts(userValues.address);
-      setUserNtfs(nfts);
+      setUserNtfs(nfts as INft[]);
       setIsLoading(false);
     };
     initNtfs();

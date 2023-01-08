@@ -29,11 +29,12 @@ import settings from "../config/settings";
 import abi from "../data/abi";
 
 import { useUserContext } from "../context/UserInfoContext";
+import { INft } from "./NFts";
 
 function StakedNfts() {
   const { userValues, updateContext } = useUserContext();
   const { getUserNfts } = useMoralis();
-  const [userNtfs, setUserNtfs] = useState<object[] | undefined>();
+  const [userNtfs, setUserNtfs] = useState<INft[] | undefined>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [selectedTokenId, setSelectedTokenId] = useState<string>("0");
 
@@ -43,7 +44,7 @@ function StakedNfts() {
     const initNtfs = async () => {
       setIsLoading(true);
       const nfts = await getUserNfts(settings.nftStakingContractAddress);
-      setUserNtfs(nfts);
+      setUserNtfs(nfts as INft[]);
       setIsLoading(false);
     };
     initNtfs();
