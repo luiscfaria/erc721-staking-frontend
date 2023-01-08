@@ -5,14 +5,14 @@ import { useUserContext } from "../context/UserInfoContext";
 
 function useMoralis() {
   const { userValues, updateContext } = useUserContext();
-  const getUserNfts = async (): Promise<object[] | undefined> => {
+  const getUserNfts = async (address: string): Promise<object[] | undefined> => {
     if (!Moralis.Core.isStarted) {
       await Moralis.start({
         apiKey: settings.moralisKey,
       });
     }
 
-    const address = userValues.address;
+    // const address = userValues.address;
     const nftCollectionAddress = settings.nftContractAddress;
 
     const chain = EvmChain.GOERLI;
@@ -26,7 +26,7 @@ function useMoralis() {
         tokenAddresses,
       });
 
-      console.log(response.toJSON().result);
+      // console.log(response.toJSON().result);
       const result = response.toJSON().result;
       return result;
     } catch (error) {
