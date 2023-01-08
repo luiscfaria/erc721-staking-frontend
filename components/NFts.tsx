@@ -62,10 +62,7 @@ function NFTs() {
     address: settings.nftContractAddress as `0x${string}`,
     abi: abi.FariaCollection.abi,
     functionName: "isApprovedForAll",
-    args: [userValues.address, settings.nftStakingContractAddress],
-    onSuccess(data) {
-      console.log("Success", data);
-    },
+    args: [userValues.address, settings.nftStakingContractAddress]
   });
 
   // ========================================================================
@@ -101,7 +98,6 @@ function NFTs() {
   const { data: waitData, error: waitError } = useWaitForTransaction({
     hash: txData?.hash,
     onSuccess(data) {
-      console.log("Use Wait on success", { data });
       if (data.status === 0) {
         handleTransactionResult(false);
       } else {

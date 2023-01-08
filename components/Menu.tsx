@@ -47,7 +47,6 @@ function Menu() {
   } = useWaitForTransaction({
     hash: txData?.hash,
     onSuccess(data) {
-      console.log("Use Wait on success", { data });
       if (data.status === 0) {
         handleTransactionResult(false);
       } else {

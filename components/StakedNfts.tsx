@@ -72,7 +72,6 @@ function StakedNfts() {
   const { data: waitData, error: waitError } = useWaitForTransaction({
     hash: txData?.hash,
     onSuccess(data) {
-      console.log("Use Wait on success", { data });
       if (data.status === 0) {
         handleTransactionResult(false);
       } else {
@@ -82,7 +81,6 @@ function StakedNfts() {
   });
 
   const handleWithdrawNft = (id: string) => {
-    console.log("🚀 ~ handleWithdrawNft ~ id", id);
     setSelectedTokenId(id);
     withdrawNft?.();
   };

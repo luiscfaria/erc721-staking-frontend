@@ -39,7 +39,7 @@ function UserTokens() {
     abi: abi.NFTStaking.abi,
     functionName: "userStakeInfo",
     args: [userValues.address],
-    onSuccess(data) {
+    onSuccess(data: any) {
       setClaimableRewards(ethers.utils.formatEther(data._availableRewards));
     },
   });
@@ -51,7 +51,7 @@ function UserTokens() {
     abi: abi.FariaToken.abi,
     functionName: "balanceOf",
     args: [userValues.address],
-    onSuccess(data) {
+    onSuccess(data: any) {
       setCurrentBalance(ethers.utils.formatUnits(data, 18));
     },
   });
@@ -78,7 +78,6 @@ function UserTokens() {
   const { data: waitData, error: waitError } = useWaitForTransaction({
     hash: txData?.hash,
     onSuccess(data) {
-      console.log("Use Wait on success", { data });
       if (data.status === 0) {
         handleTransactionResult(false);
       } else {
@@ -88,7 +87,6 @@ function UserTokens() {
   });
 
   const handleClaim = () => {
-    console.log('a')
     claim?.();
   };
 
