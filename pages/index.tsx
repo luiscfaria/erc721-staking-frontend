@@ -17,7 +17,7 @@ export default function Home() {
   useEffect(() => {
     if (isConnected && address) {
       setIsUserConnected(true);
-      updateContext({...userValues, address: address})
+      updateContext({ ...userValues, address: address });
     }
   }, [address, isConnected]);
 
@@ -27,8 +27,8 @@ export default function Home() {
 
   const handleDisconnect = () => {
     disconnect();
-    setIsUserConnected(false);    
-    updateContext({...userValues, address: ''})
+    setIsUserConnected(false);
+    updateContext({ ...userValues, address: "" });
   };
 
   const formatedAddress = address ? formatEthAddress(address) : "";
@@ -42,7 +42,7 @@ export default function Home() {
         </h1>
         {isUserConnected ? (
           <>
-            <Button colorScheme="messenger" onClick={continueToApp}>
+            <Button className="menu-btn" onClick={continueToApp}>
               {`Continue with ${formatEthAddress(formatedAddress)}`}
             </Button>
             <Button
