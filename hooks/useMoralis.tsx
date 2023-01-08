@@ -1,8 +1,10 @@
 import Moralis from "moralis";
 import { EvmChain } from "@moralisweb3/common-evm-utils";
 import settings from "../config/settings";
+import { useUserContext } from "../context/UserInfoContext";
 
 function useMoralis() {
+  const { userValues, updateContext } = useUserContext();
   const getUserNfts = async (): Promise<object[] | undefined> => {
     if (!Moralis.Core.isStarted) {
       await Moralis.start({
@@ -10,7 +12,7 @@ function useMoralis() {
       });
     }
 
-    const address = "0xcCa7A4AC10ac4ce410804ae1506F0ba4d706c225";
+    const address = userValues.address;
     const nftCollectionAddress = settings.nftContractAddress;
 
     const chain = EvmChain.GOERLI;

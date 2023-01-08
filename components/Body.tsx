@@ -12,6 +12,8 @@ import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import settings from "../config/settings";
 
+import { UserContextProvider } from "../context/UserInfoContext";
+
 const { chains, provider } = configureChains(
   [mainnet, goerli, polygon, optimism, arbitrum],
   [alchemyProvider({ apiKey: settings.alchemy.id }), publicProvider()]
@@ -81,13 +83,15 @@ function MultipleProviderComponent(props: any) {
 
   return (
     <div>
-      <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider chains={chains}>
-          <ChakraProvider theme={theme}>
-            <Component {...props} />
-          </ChakraProvider>
-        </RainbowKitProvider>
-      </WagmiConfig>
+      <UserContextProvider>
+        <WagmiConfig client={wagmiClient}>
+          <RainbowKitProvider chains={chains}>
+            <ChakraProvider theme={theme}>
+              <Component {...props} />
+            </ChakraProvider>
+          </RainbowKitProvider>
+        </WagmiConfig>
+      </UserContextProvider>
     </div>
   );
 }

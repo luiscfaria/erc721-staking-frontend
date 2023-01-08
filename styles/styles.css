@@ -15,6 +15,28 @@
     height: 100px;
 }
 
+.menu {
+    width: 100%;
+    height: fit-content;
+    background-color: #1C1E21;
+}
+
+.menu-btns {
+    width: 100%;
+    max-width: 1000px;
+    height: fit-content;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.menu-btn {
+    background-color: #A9149C !important;
+    color: aliceblue !important;
+    font-family: 'Montserrat', sans-serif !important; 
+}
+
 .main h1 {
     font-size: 3rem;
     font-weight: 600;
